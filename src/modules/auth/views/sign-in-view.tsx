@@ -159,8 +159,10 @@ export const SignInView = () => {
         className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance
       *:[a]:underline *:[a]:underline-offset-4"
       >
-        by clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Police</a>
+        by clicking continue, you agree to our{" "}
+        <a href="/terms">Terms of Service</a> and{" "}
+        <a href="/privacy">Privacy Policy</a>
+        <a href="#">Privacy Policy</a>
       </div>
     </div>
   );

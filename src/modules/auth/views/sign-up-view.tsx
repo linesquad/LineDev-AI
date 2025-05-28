@@ -23,7 +23,13 @@ const formSchema = z
   .object({
     name: z.string().min(1, { message: "Name is required" }),
     email: z.string().email(),
-    password: z.string().min(1, { message: "Password is required" }),
+    password: z
+      .string()
+      .min(8, { message: "Password must be at least 8 characters" })
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, {
+        message:
+          "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+      }),
     confirmPassword: z
       .string()
       .min(1, { message: "Confirm password is required" }),
@@ -210,7 +216,7 @@ export const SignUpView = () => {
       *:[a]:underline *:[a]:underline-offset-4"
       >
         by clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Police</a>
+        and <a href="#">Privacy Policy</a>
       </div>
     </div>
   );
