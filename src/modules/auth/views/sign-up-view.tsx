@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 const formSchema = z
   .object({
@@ -42,6 +42,7 @@ const formSchema = z
 
 export const SignUpView = () => {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -53,6 +54,12 @@ export const SignUpView = () => {
       confirmPassword: "",
     },
   });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     setError(null);

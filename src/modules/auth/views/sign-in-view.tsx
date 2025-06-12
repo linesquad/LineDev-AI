@@ -18,14 +18,16 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1, { message: "Password is required" }),
 });
 
 export const SignInView = () => {
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<boolean>(false);
@@ -36,6 +38,12 @@ export const SignInView = () => {
       password: "",
     },
   });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     setError(null);
@@ -195,7 +203,6 @@ export const SignInView = () => {
         by clicking continue, you agree to our{" "}
         <a href="/terms">Terms of Service</a> and{" "}
         <a href="/privacy">Privacy Policy</a>
-        <a href="#">Privacy Policy</a>
       </div>
     </div>
   );
