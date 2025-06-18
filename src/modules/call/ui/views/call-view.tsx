@@ -27,5 +27,5 @@ export const CallView = ({ meetingId }: CallViewProps) => {
       </div>
     );
   }
-  return <CallProvider meetingId={meetingId} maatingName={call.name} />;
+  return <CallProvider meetingId={meetingId} meetingName={call.name} />;
 };
