@@ -10,16 +10,12 @@ import {
   MAX_FREE_MEETINGS,
   MAX_FREE_AGENTS,
 } from "@/modules/premium/constants";
-import { authClient } from "@/lib/auth-client";
 
 export const DashboardTrial = () => {
   const trpc = useTRPC();
   const { data: freeUsage } = useQuery(
     trpc.premium.getFreeUsage.queryOptions()
   );
-  const { data: customer } = authClient.useSession();
-
-  if (customer?.user.email === "moddyeff@gmail.com") return null;
 
   if (!freeUsage) return null;
 
