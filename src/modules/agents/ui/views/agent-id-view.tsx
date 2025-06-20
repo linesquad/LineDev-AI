@@ -36,7 +36,9 @@ export const AgentIdView = ({ agentId }: AgentIdViewProps) => {
         await queryClient.invalidateQueries(
           trpc.agents.getMany.queryOptions({})
         );
-        // TODO: invalidate here free tier usage
+        await queryClient.invalidateQueries(
+          trpc.premium.getFreeUsage.queryOptions()
+        );
         toast.success("Agent removed successfully");
         router.push("/agents");
       },
